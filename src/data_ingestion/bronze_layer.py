@@ -1,10 +1,9 @@
 """
-Μην τον δοκιμασετε δεν τρεχει σε τοπικο περιβαλλον, μονο σε Databricks με Delta Lake
-γιατι θελει pyspark + java + delta lake dependencies που δεν ειναι απλα να ρυθμιστουν τοπικα.
+Intended execution environment: Azure Databricks with Unity Catalog.
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import lit, current_timestamp
+from pyspark.sql.functions import current_timestamp
 from pyspark.sql.types import StructType, StructField, StringType, TimestampType
 
 # Define the explicit schema for the Bronze Ingestion Table
@@ -17,16 +16,14 @@ BRONZE_TABLE_SCHEMA = StructType([
     StructField("ingestion_timestamp", TimestampType(), False)
 ])
 
-def ingest_metadata_to_bronze(spark: SparkSession, downloaded_files: list, catalog: str = "main", schema: str = "regulatory_project"):
+def ingest_metadata_to_bronze(spark: SparkSession, downloaded_files: list, catalog: str = "accenture2026dbcks", schema: str = "team2"):
     """
     Ingests metadata of downloaded PDF documents into the Bronze Delta Table using the PySpark Dataframe API.
+    Target Environment: Azure Databricks Unity Catalog.
     """
     table_name = f"{catalog}.{schema}.bronze_regulatory_log"
     
-    # Create the database schema if it does not exist
-    spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog}.{schema}")
-    
-    # Create the Bronze Delta Table if it does not exist using SQL definition
+    # Create the Bronze Delta Table if it does not exist within the managed schema
     spark.sql(f"""
         CREATE TABLE IF NOT EXISTS {table_name} (
             celex_id STRING,
@@ -38,7 +35,7 @@ def ingest_metadata_to_bronze(spark: SparkSession, downloaded_files: list, catal
         ) USING DELTA
     """)
     
-    # Prepare local Python records from the input list
+    # Prepare local Python records from the input list using timezone-aware UTC datetime
     records = []
     for file_info in downloaded_files:
         records.append((
@@ -47,7 +44,7 @@ def ingest_metadata_to_bronze(spark: SparkSession, downloaded_files: list, catal
             file_info["file_path"],
             "EUR-Lex",
             "RAW_DOWNLOADED",
-            datetime.utcnow()
+            datetime.now(timezone.utc)
         ))
         
     if not records:
@@ -77,25 +74,23 @@ def ingest_metadata_to_bronze(spark: SparkSession, downloaded_files: list, catal
 
 
 if __name__ == "__main__":
-    print("Initializing local SparkSession for smoke testing...")
-    local_spark = SparkSession.builder \
-        .appName("LocalBronzeTesting") \
-        .master("local[*]") \
-        .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
-        .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
-        .getOrCreate()
-        
-    sample_downloads = [
-        {
-            "celex_id": "32022R2554", 
-            "file_name": "32022R2554_EN.pdf", 
-            "file_path": "abfss://regulatory-data@storage.dfs.core.windows.net/raw/32022R2554_EN.pdf"
-        }
+    # Execution setup specifically configured for your Azure Databricks production workspace
+    print("Initializing active SparkSession from Databricks cluster...")
+    spark_session = SparkSession.builder.getOrCreate()
+    
+    # Production cloud layout mapping directly to your team2 Unity Catalog Volume
+    production_files = [
+        {"celex_id": "32022R2554", "file_name": "32022R2554_EN.pdf", "file_path": "/Volumes/accenture2026dbcks/team2/volume/32022R2554_EN.pdf"},
+        {"celex_id": "32018L0843", "file_name": "32018L0843_EN.pdf", "file_path": "/Volumes/accenture2026dbcks/team2/volume/32018L0843_EN.pdf"},
+        {"celex_id": "32014L0065", "file_name": "32014L0065_EN.pdf", "file_path": "/Volumes/accenture2026dbcks/team2/volume/32014L0065_EN.pdf"},
+        {"celex_id": "32016R0679", "file_name": "32016R0679_EN.pdf", "file_path": "/Volumes/accenture2026dbcks/team2/volume/32016R0679_EN.pdf"},
+        {"celex_id": "32024R1689", "file_name": "32024R1689_EN.pdf", "file_path": "/Volumes/accenture2026dbcks/team2/volume/32024R1689_EN.pdf"}
     ]
     
-    try:
-        ingest_metadata_to_bronze(local_spark, sample_downloads, catalog="local_test", schema="bronze")
-    except Exception as e:
-        print(f"Environment log variation handled: {e}")
-    finally:
-        local_spark.stop()
+    # Execute the core Bronze ingestion function
+    ingest_metadata_to_bronze(
+        spark=spark_session,
+        downloaded_files=production_files,
+        catalog="accenture2026dbcks",
+        schema="team2"
+    )
