@@ -3,7 +3,7 @@ rag_pipeline.py
 """
 
 from src.data_ingestion.context_builder import build_context
-from .retriever import AzureOpenAIChatLLM
+from src.RAG_layer.retriever import AzureOpenAIChatLLM
 from src.data_ingestion.vector_store import ChromaVectorStore
 
 

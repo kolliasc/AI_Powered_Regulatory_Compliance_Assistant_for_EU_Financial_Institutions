@@ -1,6 +1,6 @@
 from src.data_ingestion.embeddings import LocalEmbeddingModel
 from src.data_ingestion.vector_store import ChromaVectorStore
-from src.data_ingestion.retriever import AzureOpenAIChatLLM
+from src.RAG_layer.retriever import AzureOpenAIChatLLM
 from src.config.settings import settings
 
 

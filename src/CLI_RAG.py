@@ -10,9 +10,9 @@ from src.data_ingestion.pdf_ingestion import extract_pdf_pages
 from src.data_ingestion.chunking import create_chunks
 from src.data_ingestion.embeddings import LocalEmbeddingModel
 from src.data_ingestion.vector_store import ChromaVectorStore
-from src.data_ingestion.retriever import AzureOpenAIChatLLM
+from src.RAG_layer.retriever import AzureOpenAIChatLLM
 from src.data_ingestion.context_builder import build_context
-from src.data_ingestion.rag_pipeline import RAGPipeline
+from src.RAG_layer.rag_pipeline import RAGPipeline
 
 
 def ingest_all_pdfs(
@@ -119,3 +119,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""
+uv run python -m src.CLI_RAG.py
+"""
