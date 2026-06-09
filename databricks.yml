@@ -1,0 +1,40 @@
+bundle:
+  name: ai-regulatory-assistant
+
+targets:
+  development:
+    default: true
+    workspace:
+      host:  https://adb-7405617412243394.14.azuredatabricks.net
+      root_path: /Workspace/Users/${workspace.current_user.userName}/bundle/${bundle.name}
+
+resources:
+  jobs:
+    regulatory_pipeline_job:
+      name: "Regulatory_Data_Pipeline"
+      tasks:
+        - task_key: bronze_layer
+          job_cluster_key: pipeline_cluster
+          spark_python_task:
+            python_file: "src/Bronze_layer.py"
+
+        - task_key: silver_layer
+          depends_on:
+            - task_key: bronze_layer
+          job_cluster_key: pipeline_cluster
+          spark_python_task:
+            python_file: "src/Silver_layer.py"
+
+        - task_key: gold_layer
+          depends_on:
+            - task_key: silver_layer
+          job_cluster_key: pipeline_cluster
+          spark_python_task:
+            python_file: "src/Gold_delta_table.py"
+
+      job_clusters:
+        - job_cluster_key: pipeline_cluster
+          new_cluster:
+            spark_version: "14.3.x-scala2.12"
+            node_type_id: "Standard_D4ds_v5"
+            num_workers: 1
