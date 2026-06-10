@@ -4,10 +4,10 @@ necessary routers for handling API requests. In the future, this file can also b
 for the html. 
 """
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+
 from src.API_layer.routers import retrieval2
 from src.API_layer.routers import auth
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="EU Compliance Assistant",
@@ -15,13 +15,12 @@ app = FastAPI(
 )
 
 app.add_middleware(
-   CORSMiddleware,
-   allow_origins=["*"],
-   allow_credentials=True,
-   allow_methods=["*"],
-   allow_headers=["*"],
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
-
 
 app.include_router(auth.router)
 app.include_router(retrieval2.router)
@@ -40,3 +39,4 @@ async def health():
     return {
         "status": "healthy"
     }
+

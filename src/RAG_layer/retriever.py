@@ -71,9 +71,7 @@ Context:
 {context}
  
 Answer:
-
 """
- 
 
         response = self.client.invoke(
             [
