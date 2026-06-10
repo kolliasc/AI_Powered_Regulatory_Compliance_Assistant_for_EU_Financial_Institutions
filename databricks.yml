@@ -16,21 +16,21 @@ resources:
         - task_key: bronze_layer
           job_cluster_key: pipeline_cluster
           spark_python_task:
-            python_file: "src/Bronze_layer.py"
+            python_file: "src/databricks_code/Bronze_layer.py"
 
         - task_key: silver_layer
           depends_on:
             - task_key: bronze_layer
           job_cluster_key: pipeline_cluster
           spark_python_task:
-            python_file: "src/Silver_layer.py"
+            python_file: "src/databricks_code/Silver_layer.py"
 
         - task_key: gold_layer
           depends_on:
             - task_key: silver_layer
           job_cluster_key: pipeline_cluster
           spark_python_task:
-            python_file: "src/Gold_delta_table.py"
+            python_file: "src/databricks_code/Gold_delta_table.py"
 
       job_clusters:
         - job_cluster_key: pipeline_cluster
@@ -38,3 +38,13 @@ resources:
             spark_version: "14.3.x-scala2.12"
             node_type_id: "Standard_D4ds_v5"
             num_workers: 1
+
+            libraries:
+              - pip:
+                  package: "azure-search-documents"
+              - pip:
+                  package: "sentence-transformers"
+              - pip:
+                  package: "transformers"
+              - pip:
+                  package: "pydantic-settings" 
