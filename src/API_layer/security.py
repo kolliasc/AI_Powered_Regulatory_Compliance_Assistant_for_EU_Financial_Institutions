@@ -7,7 +7,10 @@ from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 
 # Configuration για το hashing και το JWT
-SECRET_KEY = os.getenv("JWT_SECRET_KEY", "SUPER_SECRET_ACCENTURE_CODEHUB_KEY_2026")
+#SECRET_KEY = os.getenv("JWT_SECRET_KEY", "SUPER_SECRET_ACCENTURE_CODEHUB_KEY_2026")
+SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+if not SECRET_KEY:
+    raise RuntimeError("JWT_SECRET_KEY env var is not set")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 

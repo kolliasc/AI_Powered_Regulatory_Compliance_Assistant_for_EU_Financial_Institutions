@@ -121,5 +121,5 @@ if __name__ == "__main__":
     main()
 
 """
-uv run python -m src.CLI_RAG.py
+uv run python -m src.CLI_RAG
 """
