@@ -48,3 +48,11 @@ resources:
                   package: "transformers"
               - pip:
                   package: "pydantic-settings" 
+              - pip:
+                  package: "openai"
+              - pip:
+                  package: "azure-identity"
+              - pip:
+                  package: "pymupdf"
+              - pip:
+                  package: "python-dotenv"
