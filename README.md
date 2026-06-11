@@ -133,7 +133,6 @@ The platform was evaluated using retrieval and generation quality metrics includ
 ### Search & Retrieval
 
 * Vector Search
-* Hybrid Search
 * Semantic Retrieval
 
 ### API & Services
@@ -146,7 +145,7 @@ The platform was evaluated using retrieval and generation quality metrics includ
 
 * Docker
 * GitHub Actions
-* CI/CD Pipelines
+
 
 
 ---
