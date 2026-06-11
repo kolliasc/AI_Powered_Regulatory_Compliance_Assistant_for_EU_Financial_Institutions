@@ -28,16 +28,16 @@ def ingest_all_pdfs(
 
         print(f"\nProcessing: {pdf_path.name}")
 
-        # 1. Extract PDF
+       
         pages = extract_pdf_pages(str(pdf_path))
 
-        # 2. Chunk
+        
         chunks = create_chunks(pages)
 
-        # 3. Embed
+        
         embedded_chunks = embedder.embed_chunks(chunks)
 
-        # 4. Store in vector DB
+      
         vector_store.add_chunks(embedded_chunks)
 
         total_chunks += len(chunks)
