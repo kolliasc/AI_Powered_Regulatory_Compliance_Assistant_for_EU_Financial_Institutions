@@ -12,7 +12,6 @@ Future:
 """
 
 from pathlib import Path
-
 import chromadb
 from chromadb.config import Settings
 

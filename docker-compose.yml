@@ -1,0 +1,13 @@
+# Convenience wrapper. From the project root:
+#   docker compose up --build
+# Reads ./.env automatically (must contain the Azure OpenAI vars + JWT_SECRET_KEY).
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile
+    image: eu-compliance-assistant
+    ports:
+      - "8000:8000"
+    env_file: .env
+    restart: unless-stopped
