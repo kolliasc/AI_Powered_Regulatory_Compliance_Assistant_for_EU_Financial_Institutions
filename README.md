@@ -1,7 +1,5 @@
 # AI-Powered Regulatory Compliance Assistant for EU Financial Institutions
 
-# AI-Powered Regulatory Compliance Assistant
-
 ## Project Goal
 
 The objective of this project is to demonstrate how modern AI Knowledge Engineering practices can be applied to regulatory compliance challenges, enabling organizations to transform large volumes of complex regulatory information into accessible, searchable, and actionable knowledge.
