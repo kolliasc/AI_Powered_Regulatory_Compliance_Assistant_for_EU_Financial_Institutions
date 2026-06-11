@@ -1,4 +1,4 @@
-# AI-Powered-Regulatory-Compliance-Assistant-for-EU-Financial-Institutions-
+# AI-Powered Regulatory Compliance Assistant for EU Financial Institutions
 
 # AI-Powered Regulatory Compliance Assistant
 
