@@ -125,7 +125,10 @@ Responses include references to source material, enabling users to verify findin
 * Enterprise-ready deployment model
 
 ---
+<div align="center">
+<img width="69%" height="466" alt="Screenshot (512)" src="https://github.com/user-attachments/assets/2786d0c2-2855-4837-a76e-c287fc30fe4d" />
+<img width="69%" height="793" alt="Screenshot (529)" src="https://github.com/user-attachments/assets/240a2b8f-e394-4400-87fd-5922db9faa05" />
+</div>
 
-<img width="860" height="1920" alt="8687fb74-996a-456b-86b6-562ecfe9852a" src="https://github.com/user-attachments/assets/951e3a91-8df1-4014-ac4d-8c92ff24dc29" />
 
 
