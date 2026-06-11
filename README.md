@@ -190,12 +190,17 @@ This command installs all project dependencies defined in the project configurat
 Create a `.env` file in the project root and configure the required settings:
 
 ```env
-AZURE_OPENAI_API_KEY=your_api_key
-AZURE_OPENAI_ENDPOINT=your_endpoint
-AZURE_OPENAI_DEPLOYMENT=gpt-4o
-AZURE_OPENAI_EMBEDDING_DEPLOYMENT=text-embedding-3-large
+AZURE_OPENAI_API_KEY = "your_api_key"
+AZURE_OPENAI_ENDPOINT = "your_endpoint"
+AZURE_OPENAI_API_VERSION = "2024-12-01-preview"
+AZURE_OPENAI_DEPLOYMENT_NAME = "gpt-4.1"
 
-CHROMA_DB_PATH=./chroma_db
+JWT_SECRET_KEY = "your_secret_key"
+
+EMBEDDING_MODEL_NAME = all-MiniLM-L6-v2
+
+AI_SEARCH_API_KEY = "your_key"
+AI_SEARCH_ENDPOINT = "your_endpoint"
 ```
 
 ---
