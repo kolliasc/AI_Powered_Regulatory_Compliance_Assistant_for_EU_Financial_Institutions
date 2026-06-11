@@ -78,6 +78,42 @@ The AI model generates grounded answers using retrieved evidence.
 Responses include references to source material, enabling users to verify findings and maintain compliance confidence.
 
 ---
+## Key Features
+
+* Intelligent regulatory document ingestion
+* AI-ready document processing
+* Semantic and hybrid search
+* Retrieval-Augmented Generation (RAG)
+* Source-backed responses
+* Metadata enrichment and lineage tracking
+* Scalable API architecture
+* Enterprise-ready deployment model
+
+---
+<div align="center">
+  
+### Regulatory Compliance Assistant Home Screen
+
+The initial interface where users can submit regulatory compliance questions and explore the platform's capabilities
+
+<img width="69%" height="466" alt="Screenshot (512)" src="https://github.com/user-attachments/assets/2786d0c2-2855-4837-a76e-c287fc30fe4d" />
+  <br><br>
+
+### RAG-Powered Question Answering
+
+The platform retrieves relevant regulatory documents and generates source-backed responses using Retrieval-Augmented Generation (RAG).
+
+<img width="69%" height="793" alt="Screenshot (529)" src="https://github.com/user-attachments/assets/240a2b8f-e394-4400-87fd-5922db9faa05" />
+
+<h3>RAG Evaluation Results</h3>
+
+<p>
+The platform was evaluated using retrieval and generation quality metrics including MMR-based retrieval relevance, Answer Relevance, and Faithfulness. These metrics assess the system's ability to retrieve contextually appropriate regulatory content and generate responses that remain grounded in source documentation.
+<p>
+
+<img width="69%" height="793" alt="Screenshot (533)" src="https://github.com/user-attachments/assets/38347452-b52f-4e2f-81d7-a3ed5bb4269e" />
+
+</div>
 
 ## Technology Stack
 
@@ -113,22 +149,125 @@ Responses include references to source material, enabling users to verify findin
 * CI/CD Pipelines
 
 
-## Key Features
+---
 
-* Intelligent regulatory document ingestion
-* AI-ready document processing
-* Semantic and hybrid search
-* Retrieval-Augmented Generation (RAG)
-* Source-backed responses
-* Metadata enrichment and lineage tracking
-* Scalable API architecture
-* Enterprise-ready deployment model
+# Running the Application
+
+## Prerequisites
+
+Before running the project, ensure the following are installed:
+
+* Python 3.11+
+* uv
+* Git
+* Azure OpenAI deployment
+* Azure OpenAI API credentials
 
 ---
-<div align="center">
-<img width="69%" height="466" alt="Screenshot (512)" src="https://github.com/user-attachments/assets/2786d0c2-2855-4837-a76e-c287fc30fe4d" />
-<img width="69%" height="793" alt="Screenshot (529)" src="https://github.com/user-attachments/assets/240a2b8f-e394-4400-87fd-5922db9faa05" />
-</div>
+
+## Clone the Repository
+
+```bash
+git clone https://github.com/<username>/AI-Powered-Regulatory-Compliance-Assistant.git
+
+cd AI-Powered-Regulatory-Compliance-Assistant
+```
+
+---
+
+## Create and Synchronize the Environment
+
+```bash
+uv sync
+```
+
+This command installs all project dependencies defined in the project configuration.
+
+---
+
+## Configure Environment Variables
+
+Create a `.env` file in the project root and configure the required settings:
+
+```env
+AZURE_OPENAI_API_KEY=your_api_key
+AZURE_OPENAI_ENDPOINT=your_endpoint
+AZURE_OPENAI_DEPLOYMENT=gpt-4o
+AZURE_OPENAI_EMBEDDING_DEPLOYMENT=text-embedding-3-large
+
+CHROMA_DB_PATH=./chroma_db
+```
+
+---
+
+## Ingest Regulatory Documents
+
+Populate the vector database by processing regulatory documents:
+
+```bash
+uv run python src/data_ingestion/run_ingestion.py
+```
+
+This step:
+
+* Extracts document content
+* Applies chunking strategies
+* Generates embeddings
+* Stores vectors in ChromaDB
+
+---
+
+## Start the API
+
+```bash
+uv run uvicorn src.main:app --reload
+```
+
+The API will be available at:
+
+```text
+http://localhost:8000
+```
+
+---
+
+## API Interface
+
+Open index.html
+
+The web interface will connect to the FastAPI backend and provide an interactive RAG-powered compliance assistant experience.
+
+
+## Example Query
+
+  "question": "How an investment firm operates?"
+
+## Expected Workflow
+
+```text
+Regulatory Documents
+        │
+        ▼
+Document Processing
+        │
+        ▼
+Chunk Generation
+        │
+        ▼
+Embedding Creation
+        │
+        ▼
+Vector Indexing
+        │
+        ▼
+Question Submission
+        │
+        ▼
+Semantic Retrieval
+        │
+        ▼
+RAG Response Generation
+```
 
 
 
