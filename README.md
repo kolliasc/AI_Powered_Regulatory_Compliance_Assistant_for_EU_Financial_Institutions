@@ -2,6 +2,10 @@
 
 # AI-Powered Regulatory Compliance Assistant
 
+## Project Goal
+
+The objective of this project is to demonstrate how modern AI Knowledge Engineering practices can be applied to regulatory compliance challenges, enabling organizations to transform large volumes of complex regulatory information into accessible, searchable, and actionable knowledge.
+
 ## Overview
 
 The AI-Powered Regulatory Compliance Assistant is an enterprise knowledge platform designed to help financial institutions navigate and understand complex European regulatory frameworks through natural language interactions.
@@ -39,124 +43,7 @@ Users interact with the system through a REST API and can ask questions in natur
 
 The platform retrieves relevant regulatory content, constructs contextual evidence, and generates responses grounded in the original source material.
 
----
 
-## High-Level Architecture
-
-Regulatory Sources
-        │
-        ▼
- Data Ingestion Layer
-        │
-        ▼
- Document Processing
-        │
-        ▼
- Metadata & Governance
-        │
-        ▼
- Embedding Generation
-        │
-        ▼
- Vector Indexing
-        │
-        ▼
- Retrieval Layer
-        │
-        ▼
- RAG Orchestration
-        │
-        ▼
- FastAPI Application
-        │
-        ▼
- End Users
-
-### Data Sources
-
-The platform collects publicly available regulatory information from official European institutions and repositories.
-
-Examples include:
-
-* EUR-Lex
-* European Banking Authority (EBA)
-* European Central Bank (ECB)
-* European Securities and Markets Authority (ESMA)
-
----
-
-### Data Ingestion
-
-The ingestion layer is responsible for:
-
-* Acquiring regulatory documents
-* Downloading and updating content
-* Detecting changes and new versions
-* Managing ingestion workflows
-
-This ensures that the knowledge base remains aligned with evolving regulatory requirements.
-
----
-
-### AI-Ready Document Processing
-
-Raw documents are transformed into structured knowledge assets through:
-
-* Text extraction
-* Content normalization
-* Intelligent chunking
-* Metadata enrichment
-* Document lineage tracking
-* Deduplication
-
-Each document fragment is enriched with contextual information to improve retrieval accuracy and traceability.
-
----
-
-
-### Embeddings & Semantic Understanding
-
-Processed content is converted into vector embeddings that capture semantic meaning rather than relying solely on keywords.
-
-This enables:
-
-* Semantic similarity search
-* Context-aware retrieval
-* Improved regulatory knowledge discovery
-* Enhanced question-answering capabilities
-
----
-
-### Retrieval-Augmented Generation (RAG)
-
-The RAG layer combines retrieval and generative AI.
-
-When a user submits a question:
-
-1. Relevant regulatory content is retrieved.
-2. Context is assembled from authoritative sources.
-3. The language model generates a grounded response.
-4. Supporting references are returned alongside the answer.
-
-This approach reduces hallucinations and improves answer reliability.
-
----
-
-### API Layer
-
-The platform exposes its functionality through a FastAPI-based service.
-
-Key capabilities include:
-
-* Document ingestion
-* Knowledge retrieval
-* Question answering
-* Health monitoring
-* Secure integration with external systems
-
-The API serves as the entry point for both users and downstream applications.
-
----
 
 ## End-to-End Workflow
 
@@ -241,6 +128,6 @@ Responses include references to source material, enabling users to verify findin
 
 ---
 
-## Project Goal
+<img width="860" height="1920" alt="8687fb74-996a-456b-86b6-562ecfe9852a" src="https://github.com/user-attachments/assets/951e3a91-8df1-4014-ac4d-8c92ff24dc29" />
 
-The objective of this project is to demonstrate how modern AI Knowledge Engineering practices can be applied to regulatory compliance challenges, enabling organizations to transform large volumes of complex regulatory information into accessible, searchable, and actionable knowledge.
+
