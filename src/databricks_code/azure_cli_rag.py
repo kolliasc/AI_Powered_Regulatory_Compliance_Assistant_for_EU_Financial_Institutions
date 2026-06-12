@@ -13,7 +13,7 @@ else:
 
 # Azure OpenAI environment variables so Pydantic can validate them
 os.environ["AZURE_OPENAI_ENDPOINT"] = "https://accenture2026ab.openai.azure.com/"
-os.environ["AZURE_OPENAI_API_KEY"] = "4dn2Hd4qnFDuPpLTQX17BSXQc8EZ92j2IQUSmmFEv4fejDIW9VypJQQJ99CFAC5T7U2XJ3w3AAABACOGwAeF"
+os.environ["AZURE_OPENAI_API_KEY"] = ""
 os.environ["AZURE_OPENAI_API_VERSION"] = "2024-12-01-preview"
 os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"] = "gpt-4.1"
 
@@ -35,7 +35,7 @@ from src.data_ingestion.chunking import create_chunks
 from src.data_ingestion.embeddings import LocalEmbeddingModel
 
 AZURE_SEARCH_ENDPOINT = "https://accenture2026search.search.windows.net"
-AZURE_SEARCH_KEY = "Gl8CoPovFit1MbFKrezT79VlTrImn7uCNN8eiQ0hTVAzSeDmQMnV"
+AZURE_SEARCH_KEY = ""
 INDEX_NAME = "index10"
 
 credential = AzureKeyCredential(AZURE_SEARCH_KEY)
@@ -132,7 +132,7 @@ from src.data_ingestion.embeddings import LocalEmbeddingModel
 
 #  NATIVE ENDPOINT RE-INITIALIZATION FOR STANDALONE EXECUTION
 AZURE_SEARCH_ENDPOINT = "https://accenture2026search.search.windows.net"
-AZURE_SEARCH_KEY = "Gl8CoPovFit1MbFKrezT79VlTrImn7uCNN8eiQ0hTVAzSeDmQMnV"
+AZURE_SEARCH_KEY = ""
 INDEX_NAME = "index10" 
 
 credential = AzureKeyCredential(AZURE_SEARCH_KEY)
